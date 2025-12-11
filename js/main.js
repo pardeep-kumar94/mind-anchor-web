@@ -25,6 +25,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const targetId = href.substring(1);
         const targetSection = document.getElementById(targetId);
 
+        // Track navigation with Firebase Analytics
+        if (window.FirebaseAnalytics) {
+          window.FirebaseAnalytics.trackNavigation(targetId);
+        }
+
         if (targetSection) {
           // Close mobile menu if open
           if (navMenu.classList.contains("active")) {
@@ -486,6 +491,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function openTypeform(e) {
     e.preventDefault();
+
+    // Track survey open with Firebase Analytics
+    if (window.FirebaseAnalytics) {
+      const source = e.target.id === 'floatingSurvey' ? 'floating_button' : 'main_cta';
+      window.FirebaseAnalytics.trackSurveyOpen(source);
+    }
 
     // Open Typeform in a new popup window
     const width = 800;
