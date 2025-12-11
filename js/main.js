@@ -488,13 +488,19 @@ document.addEventListener("DOMContentLoaded", function () {
   const TYPEFORM_URL = "https://form.typeform.com/to/CYLwCzTw";
 
   const floatingSurvey = document.getElementById("floatingSurvey");
+  const navSurveyBtn = document.getElementById("navSurveyBtn");
 
   function openTypeform(e) {
     e.preventDefault();
 
     // Track survey open with Firebase Analytics
     if (window.FirebaseAnalytics) {
-      const source = e.target.id === 'floatingSurvey' ? 'floating_button' : 'main_cta';
+      let source = 'main_cta';
+      if (e.target.id === 'floatingSurvey') {
+        source = 'floating_button';
+      } else if (e.target.id === 'navSurveyBtn' || e.currentTarget.id === 'navSurveyBtn') {
+        source = 'nav_button';
+      }
       window.FirebaseAnalytics.trackSurveyOpen(source);
     }
 
@@ -525,6 +531,17 @@ document.addEventListener("DOMContentLoaded", function () {
       button.addEventListener("click", openTypeform);
     }
   });
+
+  // Track nav survey button clicks (opens directly, no popup)
+  if (navSurveyBtn) {
+    navSurveyBtn.addEventListener("click", function() {
+      // Track the click with Firebase Analytics
+      if (window.FirebaseAnalytics) {
+        window.FirebaseAnalytics.trackSurveyOpen('nav_button');
+      }
+      console.log("Nav survey button clicked at:", new Date().toISOString());
+    });
+  }
 
   // Floating button scroll behavior
   if (floatingSurvey) {
