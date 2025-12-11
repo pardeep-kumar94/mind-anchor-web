@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0; url=https://form.typeform.com/to/CYLwCzTw">
+    <title>Redirecting to Survey - MindAnchor</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0A0A0A;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .redirect-container {
+            max-width: 500px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.125rem;
+            color: #8A8A8A;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto;
+            border: 4px solid rgba(255, 107, 53, 0.2);
+            border-top-color: #FF6B35;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .manual-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(255, 107, 53, 0.4);
+        }
+
+        .manual-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 48px rgba(255, 107, 53, 0.6);
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+
+        .back-link {
+            margin-top: 1.5rem;
+            display: block;
+            color: #6A6A6A;
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #FF6B35;
+        }
+    </style>
+
+    <!-- Firebase Analytics -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAQaCbD51X7_2p_xWsu74bcjo-qbXsuts0",
+            authDomain: "mindachor.firebaseapp.com",
+            projectId: "mindachor",
+            storageBucket: "mindachor.firebasestorage.app",
+            messagingSenderId: "177608891999",
+            appId: "1:177608891999:web:68bfd7aba6cf31859805ea",
+            measurementId: "G-8D57WWEFJB"
+        };
+
+        try {
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+
+            // Track survey redirect
+            logEvent(analytics, 'survey_redirect', {
+                source: 'direct_link',
+                url: '/survey',
+                timestamp: new Date().toISOString()
+            });
+        } catch (error) {
+            console.warn("Analytics tracking failed:", error);
+        }
+
+        // JavaScript redirect as backup
+        setTimeout(() => {
+            window.location.href = 'https://form.typeform.com/to/CYLwCzTw';
+        }, 100);
+    </script>
+</head>
+<body>
+    <div class="redirect-container">
+        <img src="images/logo.svg" alt="MindAnchor Logo" class="logo">
+
+        <h1>Redirecting to Survey...</h1>
+
+        <p>You're being redirected to our survey. Thank you for sharing your thoughts!</p>
+
+        <div class="spinner"></div>
+
+        <a href="https://form.typeform.com/to/CYLwCzTw" class="manual-link">
+            Click here if not redirected
+        </a>
+
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </div>
+</body>
+</html>
