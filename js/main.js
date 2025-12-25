@@ -481,16 +481,16 @@ console.log(
 );
 
 // ==========================================
-// Typeform Survey Integration
+// Survey Form Integration
 // ==========================================
 document.addEventListener("DOMContentLoaded", function () {
-  // Configuration - Replace with your Typeform URL
-  const TYPEFORM_URL = "https://form.typeform.com/to/CYLwCzTw";
+  // Configuration - URL to custom survey form
+  const SURVEY_FORM_URL = "survey-form.html";
 
   const floatingSurvey = document.getElementById("floatingSurvey");
   const navSurveyBtn = document.getElementById("navSurveyBtn");
 
-  function openTypeform(e) {
+  function openSurveyForm(e) {
     e.preventDefault();
 
     // Track survey open with Firebase Analytics
@@ -504,17 +504,8 @@ document.addEventListener("DOMContentLoaded", function () {
       window.FirebaseAnalytics.trackSurveyOpen(source);
     }
 
-    // Open Typeform in a new popup window
-    const width = 800;
-    const height = 600;
-    const left = (window.innerWidth - width) / 2;
-    const top = (window.innerHeight - height) / 2;
-
-    window.open(
-      TYPEFORM_URL,
-      "MindAnchor Survey",
-      `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`
-    );
+    // Navigate to survey form page
+    window.location.href = SURVEY_FORM_URL;
 
     // Track survey click
     console.log("Survey opened at:", new Date().toISOString());
@@ -528,7 +519,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   surveyButtons.forEach((button) => {
     if (button) {
-      button.addEventListener("click", openTypeform);
+      button.addEventListener("click", openSurveyForm);
     }
   });
 
@@ -545,7 +536,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Floating button scroll behavior
   if (floatingSurvey) {
-    floatingSurvey.addEventListener("click", openTypeform);
+    floatingSurvey.addEventListener("click", openSurveyForm);
 
     // Hide floating button on scroll down, show on scroll up
     let lastScroll = 0;
@@ -719,5 +710,4 @@ window.MindAnchor = {
   validateEmail,
   validateForm,
   showDownloadModal,
-  openTypeform: openTypeform || null,
 };

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Survey - MindAnchor</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0A0A0A;
+            color: #FFFFFF;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .survey-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .survey-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+        }
+
+        .survey-description {
+            font-size: 1rem;
+            color: #8A8A8A;
+            line-height: 1.6;
+        }
+
+        .survey-form {
+            background: #1A1A1A;
+            border-radius: 16px;
+            padding: 2.5rem;
+            border: 1px solid #2A2A2A;
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: #FF6B35;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-right: 0.75rem;
+        }
+
+        .question-label {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .question-description {
+            font-size: 0.875rem;
+            color: #6A6A6A;
+            margin-bottom: 1rem;
+            margin-left: 2.5rem;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: #0A0A0A;
+            border: 1px solid #2A2A2A;
+            border-radius: 8px;
+            color: #FFFFFF;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 0.9375rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #FF6B35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            margin-left: 2.5rem;
+        }
+
+        .radio-option,
+        .checkbox-option {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-option input[type="radio"],
+        .checkbox-option input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+            cursor: pointer;
+            accent-color: #FF6B35;
+        }
+
+        .radio-option label,
+        .checkbox-option label {
+            color: #CCCCCC;
+            font-size: 0.9375rem;
+            cursor: pointer;
+        }
+
+        .range-slider {
+            margin-left: 2.5rem;
+        }
+
+        .range-input {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #2A2A2A;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .range-input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #FF6B35;
+            cursor: pointer;
+        }
+
+        .range-input::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #FF6B35;
+            cursor: pointer;
+            border: none;
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: #6A6A6A;
+        }
+
+        .range-value {
+            text-align: center;
+            margin-top: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #FF6B35;
+        }
+
+        .submit-section {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(255, 107, 53, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            display: none;
+            background: #1A1A1A;
+            border: 2px solid #4CAF50;
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        .success-text {
+            color: #8A8A8A;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #FF6B35;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #FF8A5C;
+        }
+
+        .error-message {
+            background: rgba(244, 67, 54, 0.1);
+            border: 1px solid #F44336;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            color: #F44336;
+            font-size: 0.875rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .survey-form {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .question-label {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-container">
+        <div class="survey-header">
+            <img src="images/logo.svg" alt="MindAnchor Logo" class="logo">
+            <h1>Help Shape MindAnchor</h1>
+            <p class="survey-description">
+                Your feedback will directly influence what we build. This takes about 2 minutes.
+            </p>
+        </div>
+
+        <form id="surveyForm" class="survey-form">
+            <!-- Question 1: Biggest Productivity Challenge -->
+            <div class="form-section">
+                <label class="question-label">
+                    <span class="question-number">1</span>
+                    What's your biggest productivity challenge?
+                </label>
+                <p class="question-description">Select all that apply</p>
+                <div class="checkbox-group">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="challenge1" name="challenges" value="Breaking down complex tasks">
+                        <label for="challenge1">Breaking down complex tasks into actionable steps</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="challenge2" name="challenges" value="Staying focused">
+                        <label for="challenge2">Staying focused and avoiding distractions</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="challenge3" name="challenges" value="Procrastination">
+                        <label for="challenge3">Overcoming procrastination</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="challenge4" name="challenges" value="Context switching">
+                        <label for="challenge4">Too much context switching between tools</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="challenge5" name="challenges" value="Time management">
+                        <label for="challenge5">Managing time effectively</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="challenge6" name="challenges" value="Energy levels">
+                        <label for="challenge6">Working against my natural energy levels</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2: Most Valuable Features -->
+            <div class="form-section">
+                <label class="question-label">
+                    <span class="question-number">2</span>
+                    Which features would be most valuable to you?
+                </label>
+                <p class="question-description">Rank your top 3</p>
+                <div class="checkbox-group">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="feature1" name="features" value="AI Task Breakdown">
+                        <label for="feature1">AI Task Breakdown</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="feature2" name="features" value="System Tray Access">
+                        <label for="feature2">System Tray Access</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="feature3" name="features" value="Energy-Based Scheduling">
+                        <label for="feature3">Energy-Based Scheduling</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="feature4" name="features" value="Procrastination Detection">
+                        <label for="feature4">Procrastination Detection</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="feature5" name="features" value="Daily AI Coaching">
+                        <label for="feature5">Daily AI Coaching</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="feature6" name="features" value="Gamification System">
+                        <label for="feature6">Gamification System</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3: Current Tools -->
+            <div class="form-section">
+                <label class="question-label">
+                    <span class="question-number">3</span>
+                    What productivity tools do you currently use?
+                </label>
+                <input type="text" class="form-input" id="currentTools" name="currentTools"
+                       placeholder="e.g., Todoist, Notion, TickTick, Motion...">
+            </div>
+
+            <!-- Question 4: Pain Points -->
+            <div class="form-section">
+                <label class="question-label">
+                    <span class="question-number">4</span>
+                    What frustrates you most about your current tools?
+                </label>
+                <textarea class="form-textarea" id="painPoints" name="painPoints"
+                          placeholder="Tell us what's not working for you..."></textarea>
+            </div>
+
+            <!-- Question 5: Pricing -->
+            <div class="form-section">
+                <label class="question-label">
+                    <span class="question-number">5</span>
+                    What would you be willing to pay per month?
+                </label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="price1" name="pricing" value="$0 - Free only">
+                        <label for="price1">$0 - Free only</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="price2" name="pricing" value="$5 - $10">
+                        <label for="price2">$5 - $10</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="price3" name="pricing" value="$10 - $15">
+                        <label for="price3">$10 - $15</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="price4" name="pricing" value="$15 - $20">
+                        <label for="price4">$15 - $20</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="price5" name="pricing" value="$20+">
+                        <label for="price5">$20+</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 6: Likelihood to Use -->
+            <div class="form-section">
+                <label class="question-label">
+                    <span class="question-number">6</span>
+                    How likely are you to use MindAnchor when it launches?
+                </label>
+                <div class="range-slider">
+                    <input type="range" class="range-input" id="likelihood" name="likelihood"
+                           min="1" max="10" value="5">
+                    <div class="range-labels">
+                        <span>Not likely</span>
+                        <span>Very likely</span>
+                    </div>
+                    <div class="range-value" id="likelihoodValue">5</div>
+                </div>
+            </div>
+
+            <!-- Question 7: Missing Features -->
+            <div class="form-section">
+                <label class="question-label">
+                    <span class="question-number">7</span>
+                    What are we missing? Any features you'd love to see?
+                </label>
+                <textarea class="form-textarea" id="missingFeatures" name="missingFeatures"
+                          placeholder="Your ideas could shape our roadmap..."></textarea>
+            </div>
+
+            <!-- Question 8: Email for Early Access -->
+            <div class="form-section">
+                <label class="question-label">
+                    <span class="question-number">8</span>
+                    Email (optional - for early access & updates)
+                </label>
+                <input type="email" class="form-input" id="email" name="email"
+                       placeholder="you@example.com">
+            </div>
+
+            <div class="error-message" id="errorMessage"></div>
+
+            <div class="submit-section">
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Submit Survey
+                </button>
+            </div>
+        </form>
+
+        <div class="success-message" id="successMessage">
+            <div class="success-icon">🎉</div>
+            <h2 class="success-title">Thank You!</h2>
+            <p class="success-text">
+                Your feedback has been submitted successfully. We'll use your insights to build something amazing.
+            </p>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAQaCbD51X7_2p_xWsu74bcjo-qbXsuts0",
+            authDomain: "mindachor.firebaseapp.com",
+            projectId: "mindachor",
+            storageBucket: "mindachor.firebasestorage.app",
+            messagingSenderId: "177608891999",
+            appId: "1:177608891999:web:68bfd7aba6cf31859805ea",
+            measurementId: "G-8D57WWEFJB"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const analytics = getAnalytics(app);
+
+        // Track page view
+        logEvent(analytics, 'survey_form_view');
+
+        // Range slider value update
+        const likelihoodSlider = document.getElementById('likelihood');
+        const likelihoodValue = document.getElementById('likelihoodValue');
+
+        likelihoodSlider.addEventListener('input', function() {
+            likelihoodValue.textContent = this.value;
+        });
+
+        // Form submission
+        const form = document.getElementById('surveyForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            errorMessage.classList.remove('show');
+
+            try {
+                console.log('Starting form submission...');
+
+                // Collect challenges
+                const challenges = Array.from(document.querySelectorAll('input[name="challenges"]:checked'))
+                    .map(cb => cb.value);
+
+                // Collect features
+                const features = Array.from(document.querySelectorAll('input[name="features"]:checked'))
+                    .map(cb => cb.value);
+
+                // Collect other form data
+                const formData = {
+                    challenges: challenges,
+                    features: features,
+                    currentTools: document.getElementById('currentTools').value,
+                    painPoints: document.getElementById('painPoints').value,
+                    pricing: document.querySelector('input[name="pricing"]:checked')?.value || '',
+                    likelihood: parseInt(document.getElementById('likelihood').value),
+                    missingFeatures: document.getElementById('missingFeatures').value,
+                    email: document.getElementById('email').value,
+                    submittedAt: serverTimestamp(),
+                    userAgent: navigator.userAgent,
+                    referrer: document.referrer
+                };
+
+                console.log('Form data collected:', formData);
+
+                // Submit to Firestore
+                console.log('Submitting to Firestore...');
+                const docRef = await addDoc(collection(db, 'survey_responses'), formData);
+
+                console.log('Survey submitted successfully with ID:', docRef.id);
+
+                // Track submission with Analytics
+                logEvent(analytics, 'survey_submit', {
+                    challenges_count: challenges.length,
+                    features_count: features.length,
+                    likelihood_score: formData.likelihood,
+                    has_email: !!formData.email
+                });
+
+                // Show success message
+                form.style.display = 'none';
+                successMessage.classList.add('show');
+
+            } catch (error) {
+                console.error('Error submitting survey:', error);
+                console.error('Error code:', error.code);
+                console.error('Error message:', error.message);
+
+                let errorMsg = 'Error submitting survey. Please try again.';
+
+                // Check for specific Firebase errors
+                if (error.code === 'permission-denied') {
+                    errorMsg = 'Permission denied. Please check Firebase security rules.';
+                } else if (error.code === 'unavailable') {
+                    errorMsg = 'Service unavailable. Please check your internet connection.';
+                } else if (error.message) {
+                    errorMsg = `Error: ${error.message}`;
+                }
+
+                errorMessage.textContent = errorMsg;
+                errorMessage.classList.add('show');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Survey';
+            }
+        });
+
+        // Track when users start filling out the form
+        let formStarted = false;
+        form.addEventListener('change', function() {
+            if (!formStarted) {
+                formStarted = true;
+                logEvent(analytics, 'survey_form_started');
+            }
+        });
+    </script>
+</body>
+</html>
